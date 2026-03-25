@@ -29,6 +29,8 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = ['https://dbook-7nhd.onrender.com', 'https://*.onrender.com']
+
 
 # Application definition
 
