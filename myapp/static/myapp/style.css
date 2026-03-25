@@ -1,0 +1,289 @@
+/* 
+    DBOOK Premium Design System
+    Theme: Modern Ultra-Glass (High-End & Dynamic)
+*/
+
+:root {
+    --primary-blue: #2563eb;
+    --primary-green: #10b981;
+    --bg-main: #f8fafc;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+    --accent-gradient: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-main);
+    background-color: var(--bg-main);
+    background-image: 
+        radial-gradient(at 0% 0%, hsla(217, 91%, 95%, 1) 0, transparent 50%), 
+        radial-gradient(at 100% 0%, hsla(162, 72%, 93%, 1) 0, transparent 50%),
+        radial-gradient(at 50% 100%, hsla(199, 89%, 95%, 1) 0, transparent 50%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    line-height: 1.7;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+}
+
+/* ===== Premium Navbar ===== */
+.main-header {
+    position: fixed;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    max-width: 1100px;
+    z-index: 1000;
+    background: var(--glass-bg);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid var(--glass-border);
+    border-radius: 2rem;
+    padding: 1rem 2.5rem;
+    box-shadow: var(--card-shadow);
+}
+
+.container-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.feature-links {
+    justify-content: flex-start;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.6rem 1.25rem;
+    border-radius: 1rem;
+}
+
+.nav-link:hover {
+    color: var(--primary-blue);
+    background: rgba(37, 99, 235, 0.05);
+    transform: translateY(-2px);
+}
+
+.btn-login, .btn-logout {
+    background: var(--accent-gradient) !important;
+    color: white !important;
+    padding: 0.7rem 1.75rem !important;
+    border-radius: 1.25rem !important;
+    box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.2);
+}
+
+.btn-login:hover, .btn-logout:hover {
+    box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.3);
+    transform: translateY(-3px) scale(1.02);
+}
+
+/* ===== Main Glass Content ===== */
+.main-content {
+    flex: 1;
+    padding: 10rem 0 5rem;
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 3rem;
+    padding: 4rem;
+    box-shadow: var(--card-shadow);
+    margin-top: 2rem;
+}
+
+h2 {
+    font-family: var(--font-heading);
+    font-size: 3.25rem;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    margin-bottom: 2.5rem;
+    background: linear-gradient(to bottom right, #1e293b, #475569);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h3 {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-blue);
+}
+
+/* ===== Grid & Book Items ===== */
+.book-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 3rem;
+    list-style: none;
+}
+
+.book-item {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    border-radius: 2.5rem;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+.book-item:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 30px 40px -10px rgba(0, 0, 0, 0.08);
+    border-color: rgba(37, 99, 235, 0.1);
+}
+
+.book-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: var(--accent-gradient);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.book-item:hover::before {
+    opacity: 1;
+}
+
+.book-item a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+.book-item p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* ===== Modern Forms ===== */
+input, select, textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid transparent;
+    border-radius: 1.5rem;
+    padding: 1.1rem 1.5rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    background: white;
+    box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.05);
+}
+
+button[type="submit"], input[type="submit"] {
+    background: var(--accent-gradient);
+    color: white;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 1.25rem 3rem;
+    font-weight: 800;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.3);
+}
+
+button:hover, input[type="submit"]:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 20px 30px -10px rgba(37, 99, 235, 0.4);
+}
+
+/* ===== Footer ===== */
+.main-footer {
+    padding: 6rem 0;
+    background: linear-gradient(to bottom, transparent, rgba(37, 99, 235, 0.03));
+    text-align: center;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* ===== Animations ===== */
+.fade-in {
+    animation: premiumFadeIn 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* ===== Utilities ===== */
+.login-info {
+    margin-top: 3rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding-top: 2rem;
+    font-weight: 500;
+}
+
+@keyframes premiumFadeIn {
+    from { opacity: 0; transform: translateY(30px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .container { padding: 0 1.5rem; }
+    .main-header { width: 92%; padding: 0.8rem 1.5rem; border-radius: 1.5rem; }
+    .logo { font-size: 1.5rem; }
+    .glass-card { padding: 2.5rem 1.5rem; border-radius: 2rem; }
+    h2 { font-size: 2.25rem; }
+    .book-list { grid-template-columns: 1fr; gap: 2rem; }
+}

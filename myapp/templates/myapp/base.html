@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello dipesh - DBOOK - {% block title %}Modern Library{% endblock %}</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Cache-busting query string -->
+    <link rel="stylesheet" type="text/css" href="{% static 'myapp/style.css' %}?v=4" />
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container-header">
+            <h1 class="logo">{% block myhdg %}DBOOK{% endblock %}</h1>
+            <nav class="navbar">
+                <ul class="nav-links">
+                    <li><a href="{% url 'myapp:index' %}" class="nav-link">Home</a></li>
+                    <li><a href="{% url 'myapp:about' %}" class="nav-link">About</a></li>
+                    <li><a href="{% url 'myapp:findbooks' %}" class="nav-link">Search</a></li>
+                    
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'myapp:user_logout' %}" class="nav-link btn-logout">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'myapp:user_signup' %}" class="nav-link">Signup</a></li>
+                        <li><a href="{% url 'myapp:user_login' %}" class="nav-link btn-login">Login</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="glass-card fade-in">
+                {% block body_block %}***{% endblock %}
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>DBOOK &copy; 2026. Premium Experience.</p>
+        </div>
+    </footer>
+</body>
+</html>

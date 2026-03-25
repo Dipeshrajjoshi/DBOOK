@@ -1,0 +1,24 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block myhdg %}Create Your Account{% endblock %}
+
+{% block body_block %}
+
+    <div class="registration-section">
+        <h2>Join DBOOK</h2>
+        <p>Become a member to borrow books and share your reviews.</p>
+
+        <form method="post" class="glass-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Create Account</button>
+        </form>
+
+        <p style="margin-top: 2rem; font-size: 0.9rem; color: var(--text-secondary);">
+            Already have an account? <a href="{% url 'myapp:user_login' %}" style="color: var(--accent-color);">Login here</a>
+        </p>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Review a Book{% endblock %}
+
+{% block myhdg %}Submit a Book Review{% endblock %}
+
+{% block body_block %}
+
+    <h2>Review a Book</h2>
+    <p>Share your thoughts about a book you've read.</p>
+
+    {% if success %}
+        <div class="success-alert" style="padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 1.25rem; margin-bottom: 2rem;">
+            <p style="color: var(--primary-green); font-weight: 700; margin: 0;">&check; Your review has been submitted successfully!</p>
+        </div>
+    {% endif %}
+
+    {% if error %}
+        <p style="color: #ef4444; font-weight: 700;">{{ error }}</p>
+    {% endif %}
+
+    <form id="review-form" action="{% url 'myapp:review' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit Review" />
+    </form>
+
+    <script>
+        document.getElementById('review-form').onsubmit = function(e) {
+            // Find the rating input by its name. Django usually gives it an ID like id_rating.
+            var ratingInput = document.getElementsByName('rating')[0];
+            if (ratingInput) {
+                var val = parseInt(ratingInput.value);
+                if (val > 5) {
+                    alert('not more than 5 is allowed');
+                    e.preventDefault(); // Stop form submission
+                    return false;
+                }
+            }
+        };
+    </script>
+
+{% endblock %}

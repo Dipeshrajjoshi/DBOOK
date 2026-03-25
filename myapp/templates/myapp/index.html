@@ -1,0 +1,43 @@
+{% extends 'myapp/base.html' %}
+
+{% block myhdg %}Welcome to DBOOK{% endblock %}
+
+{% block body_block %}
+
+    {% if booklist %}
+        <h2>Explore Our Collection</h2>
+        <ul class="book-list">
+            {% for book in booklist %}
+                <li class="book-item">
+                    <a href="{% url 'myapp:detail' book.id %}">{{book.title}}</a>
+                    <p>{{ book.get_category_display }} - ${{ book.price }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+        <div class="alert alert-info">
+            <strong>There are no available books at the moment!</strong>
+        </div>
+    {% endif %}
+
+    <div class="features-section">
+        <h3>Quick Features</h3>
+        <ul class="nav-links feature-links">
+            <li><a href="{% url 'myapp:feedback1' %}" class="nav-link">Feedback</a></li>
+            <li><a href="{% url 'myapp:findbooks' %}" class="nav-link">Search</a></li>
+            <li><a href="{% url 'myapp:place_order' %}" class="nav-link">Order</a></li>
+            <li><a href="{% url 'myapp:review' %}" class="nav-link">Review</a></li>
+        </ul>
+    </div>
+
+    <!-- Lab 9: Session Info -->
+    <div class="login-info">
+        {% if last_login %}
+            <p><strong>Your last login was:</strong> {{ last_login }}</p>
+        {% else %}
+            <p>{{ last_login_message }}</p>
+        {% endif %}
+    </div>
+
+{% endblock %}

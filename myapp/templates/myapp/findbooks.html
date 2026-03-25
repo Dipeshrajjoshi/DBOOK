@@ -1,0 +1,35 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Find Books{% endblock %}
+
+{% block myhdg %}Search for Books{% endblock %}
+
+{% block body_block %}
+
+    <div class="search-section">
+        <h2>Find Your Next Read</h2>
+        <form method="get" class="glass-form">
+            {{ form.as_p }}
+            <button type="submit">Search Collection</button>
+        </form>
+    </div>
+
+    <hr style="margin: 3rem 0; opacity: 0.1;">
+
+    <h3>Search Results</h3>
+    <div class="results-container" style="margin-top: 1.5rem;">
+        {% if books %}
+            <ul class="book-list">
+                {% for book in books %}
+                    <li class="book-item">
+                        <a href="{% url 'myapp:detail' book.id %}">{{ book.title }}</a>
+                        <p>{{ book.get_category_display }} — Price: ${{ book.price }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No books found matching your criteria.</p>
+        {% endif %}
+    </div>
+
+{% endblock %}

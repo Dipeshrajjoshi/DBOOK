@@ -1,0 +1,37 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}{{book.title}} - Book Details{% endblock %}
+
+{% block myhdg %}Book Details{% endblock %}
+
+{% block body_block %}
+
+    <div class="book-detail fade-in">
+        <h2>{{book.title}}</h2>
+        
+        <div class="info-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div class="info-item">
+                <p style="text-transform: uppercase; font-size: 0.75rem; font-weight: 700; color: var(--accent-color);">Price</p>
+                <p style="font-size: 1.5rem; font-weight: 600; color: var(--text-primary);">${{book.price}}</p>
+            </div>
+            <div class="info-item">
+                <p style="text-transform: uppercase; font-size: 0.75rem; font-weight: 700; color: var(--accent-color);">Publisher</p>
+                <p style="font-size: 1.1rem; color: var(--text-primary);">{{book.publisher.name}}</p>
+            </div>
+            <div class="info-item">
+                <p style="text-transform: uppercase; font-size: 0.75rem; font-weight: 700; color: var(--accent-color);">Category</p>
+                <p style="font-size: 1.1rem; color: var(--text-primary);">{{book.get_category_display}}</p>
+            </div>
+            <div class="info-item">
+                <p style="text-transform: uppercase; font-size: 0.75rem; font-weight: 700; color: var(--accent-color);">Pages</p>
+                <p style="font-size: 1.1rem; color: var(--text-primary);">{{book.num_pages}} pages</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 3rem; display: flex; gap: 2rem; align-items: center;">
+            <a href="{% url 'myapp:index' %}" class="nav-link" style="color: var(--text-muted); font-weight: 600;">&larr; Back to collection</a>
+            <a href="{% url 'myapp:chk_reviews' book.id %}" class="btn-login" style="text-decoration: none;">View Reviews</a>
+        </div>
+    </div>
+
+{% endblock %}

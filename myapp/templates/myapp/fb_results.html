@@ -1,0 +1,18 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Feedback Results{% endblock %}
+
+{% block myhdg %}Thank You!{% endblock %}
+
+{% block body_block %}
+
+    <h2>Your Feedback</h2>
+    <p>You prefer:</p>
+    <ul>
+        {% for choice in choices %}
+            <li>{{ choice }}</li>
+        {% endfor %}
+    </ul>
+    <p>Thank you for sharing your preferences!</p>
+
+{% endblock %}

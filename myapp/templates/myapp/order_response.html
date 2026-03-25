@@ -1,0 +1,25 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Order Confirmation{% endblock %}
+
+{% block myhdg %}Order Placed Successfully!{% endblock %}
+
+{% block body_block %}
+
+    <h2>Thank You for Your Order</h2>
+
+    <p><strong>Order ID:</strong> {{ order.id }}</p>
+    <p><strong>Member:</strong> {{ order.member }}</p>
+    <p><strong>Order Type:</strong> {{ order.get_order_type_display }}</p>
+    <p><strong>Order Date:</strong> {{ order.order_date }}</p>
+
+    <h3>Books Ordered:</h3>
+    <ul>
+        {% for book in books %}
+            <li>{{ book.title }}</li>
+        {% endfor %}
+    </ul>
+
+    <p><a href="{% url 'myapp:index' %}">Return to Home</a></p>
+
+{% endblock %}

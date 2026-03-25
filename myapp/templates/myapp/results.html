@@ -1,0 +1,29 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block myhdg %}Search Results{% endblock %}
+
+{% block body_block %}
+
+    <h2>Hello {% if name %}{{ name }}{% else %}Guest{% endif %}!</h2>
+
+    <p><strong>Category:</strong> {{ category }}</p>
+    <p><strong>Maximum Price:</strong> ${{ max_price }}</p>
+
+    {% if booklist %}
+        <h3>Books Found ({{ booklist.count }}):</h3>
+        <ul>
+            {% for book in booklist %}
+                <li>
+                    <a href="{% url 'myapp:detail' book.id %}">{{ book.title }}</a>
+                    - <strong>${{ book.price }}</strong>
+                    ({{ book.get_category_display }})
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No books found matching your criteria.</p>
+    {% endif %}
+
+{% endblock %}
