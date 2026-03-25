@@ -13,7 +13,7 @@ graph TD
     User((User/Browser)) -->|HTTP Requests| URL[URL Dispatcher]
     URL -->|Route to View| View[Views]
     View -->|Query Data| Model[Models]
-    Model <=>|ORM| DB[(SQLite Database)]
+    Model ---|ORM| DB[(SQLite Database)]
     View -->|Context Data| Template[Templates]
     Template -->|Rendered HTML/CSS| User
     
