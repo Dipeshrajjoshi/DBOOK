@@ -230,6 +230,18 @@ def user_signup(request):
     return render(request, 'myapp/signup.html', {'form': form})
 
 
+def discover(request):
+    """Market Trends: Top trending books in March 2026"""
+    trending_books = [
+        {'title': 'The Night We Met', 'author': 'Abby Jimenez', 'genre': 'Romance'},
+        {'title': 'The Wings That Bind', 'author': 'Briar Boleyn', 'genre': 'Fantasy'},
+        {'title': 'Want to Know a Secret?', 'author': 'Freida McFadden', 'genre': 'Thriller'},
+        {'title': 'A World Appears', 'author': 'Michael Pollan', 'genre': 'Non-Fiction'},
+        {'title': 'Kids, Wait Till You Hear This!', 'author': 'Liza Minnelli', 'genre': 'Memoir'},
+    ]
+    return render(request, 'myapp/discover.html', {'trending_books': trending_books})
+
+
 # -----------------------------
 # AI Chat Backend
 # -----------------------------

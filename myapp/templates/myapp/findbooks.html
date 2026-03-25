@@ -10,7 +10,10 @@
         <h2>Find Your Next Read</h2>
         <form method="get" class="glass-form">
             {{ form.as_p }}
-            <button type="submit">Search Collection</button>
+            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                <button type="submit" style="flex: 1;">Search Collection</button>
+                <button type="button" onclick="const q = document.querySelector('input[name=\'name\']').value; if(q) window.open('https://www.google.com/search?q=' + encodeURIComponent(q) + '+book', '_blank'); else alert('Please enter a book name first');" style="background: rgba(16, 185, 129, 0.1); color: var(--primary-green); border: 1px solid rgba(16, 185, 129, 0.2); flex: 1;">Search Globally &nearr;</button>
+            </div>
         </form>
     </div>
 

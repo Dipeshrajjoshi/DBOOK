@@ -23,6 +23,7 @@
                 <ul class="nav-links">
                     <li><a href="{% url 'myapp:index' %}" class="nav-link">Home</a></li>
                     <li><a href="{% url 'myapp:about' %}" class="nav-link">About</a></li>
+                    <li><a href="{% url 'myapp:discover' %}" class="nav-link">Discover</a></li>
                     <li><a href="{% url 'myapp:findbooks' %}" class="nav-link">Search</a></li>
                     
                     {% if user.is_authenticated %}

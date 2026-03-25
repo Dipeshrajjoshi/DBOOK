@@ -28,9 +28,10 @@
             </div>
         </div>
 
-        <div style="margin-top: 3rem; display: flex; gap: 2rem; align-items: center;">
+        <div style="margin-top: 3rem; display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;">
             <a href="{% url 'myapp:index' %}" class="nav-link" style="color: var(--text-muted); font-weight: 600;">&larr; Back to collection</a>
             <a href="{% url 'myapp:chk_reviews' book.id %}" class="btn-login" style="text-decoration: none;">View Reviews</a>
+            <a href="https://www.google.com/search?q={{ book.title }}+{{ book.author }}+book" target="_blank" class="nav-link" style="border: 1px solid var(--primary-green); color: var(--primary-green); font-size: 0.9rem;">Find Externally &nearr;</a>
         </div>
     </div>
 

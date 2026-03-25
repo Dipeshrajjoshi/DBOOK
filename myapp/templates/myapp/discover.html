@@ -1,0 +1,36 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Discover Global Trends{% endblock %}
+
+{% block myhdg %}Market Discovery{% endblock %}
+
+{% block body_block %}
+<div class="discover-section fade-in">
+    <h2>Global Market Trends - March 2026</h2>
+    <p style="color: var(--text-muted); margin-bottom: 3rem;">Explore what the world is reading right now. These trending titles are making waves across the global book market.</p>
+
+    <div class="trending-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2.5rem;">
+        {% for book in trending_books %}
+            <div class="trending-card" style="background: white; padding: 2.5rem; border-radius: 2rem; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01); transition: all 0.3s ease;">
+                <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 800; color: var(--primary-green); letter-spacing: 0.05em;">{{ book.genre }}</span>
+                <h3 style="margin: 0.75rem 0; font-size: 1.4rem; color: var(--text-main);">{{ book.title }}</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem;">by {{ book.author }}</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    <a href="https://www.google.com/search?q={{ book.title }}+{{ book.author }}+book" target="_blank" class="nav-link" style="background: rgba(37, 99, 235, 0.05); color: var(--primary-blue); text-align: center; border-radius: 1rem; padding: 0.75rem; font-weight: 700;">Find on Google Books</a>
+                    <a href="https://www.amazon.com/s?k={{ book.title }}+{{ book.author }}" target="_blank" class="nav-link" style="background: rgba(16, 185, 129, 0.05); color: var(--primary-green); text-align: center; border-radius: 1rem; padding: 0.75rem; font-weight: 700;">View on Amazon</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div style="margin-top: 5rem; padding: 3rem; background: var(--glass-bg); border-radius: 2.5rem; text-align: center; border: 1px solid var(--glass-border);">
+        <h3 style="color: var(--text-main);">Can't find a specific book?</h3>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">Use our global discovery search to look beyond our internal library.</p>
+        <form action="https://www.google.com/search" method="get" target="_blank" style="max-width: 500px; margin: 0 auto; display: flex; gap: 1rem;">
+            <input type="text" name="q" placeholder="Search any book title or author..." required style="margin-bottom: 0;">
+            <button type="submit" style="white-space: nowrap;">Search Externally</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
