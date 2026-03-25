@@ -1,36 +1,35 @@
-Here’s an upgraded **README.md** with a **complete system design diagram section** using **Markdown + Mermaid diagrams** (these render directly on GitHub and look very professional):
-
----
-
 # DBOOK – Library Management System
 
-DBOOK is a full-stack library management web application built using Django. It enables efficient management of books, publishers, and users through a structured and scalable system.
+A full-stack library management web application developed under **LSP Technologies Inc., Canada**.  
+DBOOK provides a structured and scalable platform to manage books, publishers, and users efficiently.
+
+Repository: https://github.com/Dipeshrajjoshi/DBOOK.git
 
 ---
 
 ## Overview
 
-This project demonstrates real-world full-stack development with a focus on backend architecture, database design, authentication, and CRUD operations.
+DBOOK is designed to demonstrate real-world full-stack development using Django, focusing on backend architecture, database design, authentication, and CRUD operations. The project reflects industry-level practices for building scalable and maintainable web applications.
 
 ---
 
 ## Features
 
-* Book Management (Create, Read, Update, Delete)
-* Publisher Management
-* User Authentication (Login/Register/Logout)
-* Search and Filtering
-* Admin Dashboard (Django Admin)
-* Secure Data Handling
+- Book Management (Create, Read, Update, Delete)
+- Publisher Management
+- User Authentication (Login, Register, Logout)
+- Search and Filtering Functionality
+- Admin Dashboard using Django Admin
+- Secure Data Handling with Django ORM
 
 ---
 
 ## Tech Stack
 
-* Backend: Django (Python)
-* Frontend: HTML, CSS, JavaScript
-* Database: SQLite / PostgreSQL
-* Authentication: Django Built-in Auth
+- Backend: Django (Python)
+- Frontend: HTML, CSS, JavaScript
+- Database: SQLite (development) / PostgreSQL (production-ready)
+- Authentication: Django Built-in Authentication System
 
 ---
 
@@ -50,7 +49,7 @@ flowchart TD
 
 ---
 
-### 2. Detailed Application Flow
+### 2. Request-Response Flow
 
 ```mermaid
 sequenceDiagram
@@ -60,14 +59,14 @@ sequenceDiagram
     participant M as Model
     participant DB as Database
 
-    U->>F: Request (Add/View Book)
+    U->>F: Sends Request
     F->>V: HTTP Request
-    V->>M: Call Model Logic
-    M->>DB: Query/Insert Data
-    DB-->>M: Return Data
+    V->>M: Business Logic
+    M->>DB: Query/Insert/Update
+    DB-->>M: Data Response
     M-->>V: Processed Data
     V-->>F: Render Template
-    F-->>U: Display Response
+    F-->>U: Response Displayed
 ```
 
 ---
@@ -136,24 +135,24 @@ erDiagram
 flowchart TD
     A[User Login/Register] --> B[Validate Credentials]
     B -->|Valid| C[Create Session]
-    B -->|Invalid| D[Error Message]
+    B -->|Invalid| D[Authentication Failed]
     C --> E[Access Protected Routes]
     E --> F[Logout]
-    F --> G[Session Destroyed]
+    F --> G[Session Terminated]
 ```
 
 ---
 
-### 6. Deployment Architecture (Future Scope)
+### 6. Deployment Architecture (Scalable Design)
 
 ```mermaid
 flowchart TD
-    A[User] --> B[Frontend (Browser)]
-    B --> C[Web Server (Gunicorn)]
-    C --> D[Django App]
-    D --> E[(PostgreSQL DB)]
-    D --> F[Cache (Redis)]
-    C --> G[Nginx]
+    A[User] --> B[Browser]
+    B --> C[Nginx]
+    C --> D[Gunicorn]
+    D --> E[Django Application]
+    E --> F[(PostgreSQL Database)]
+    E --> G[Redis Cache]
 ```
 
 ---
@@ -161,11 +160,14 @@ flowchart TD
 ## Installation
 
 ```bash
-git clone https://github.com/your-username/dbook.git
-cd dbook
+git clone https://github.com/Dipeshrajjoshi/DBOOK.git
+cd DBOOK
 python -m venv venv
-source venv/bin/activate  # Mac/Linux
-venv\Scripts\activate     # Windows
+
+# Activate virtual environment
+source venv/bin/activate      # Mac/Linux
+venv\Scripts\activate         # Windows
+
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
@@ -175,18 +177,35 @@ python manage.py runserver
 
 ## Usage
 
-* App: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
-* Admin Panel: [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
+- Application: http://127.0.0.1:8000/
+- Admin Panel: http://127.0.0.1:8000/admin/
+
+---
+
+## Organization
+
+Developed under **LSP Technologies Inc., Canada**, focusing on building scalable software solutions and modern web applications.
 
 ---
 
 ## Future Improvements
 
-* Book Borrow/Return System
-* Role-Based Access Control
-* REST API (Django REST Framework)
-* React Frontend Integration
-* Cloud Deployment (AWS/GCP)
+- Book Borrow and Return System
+- Role-Based Access Control (Admin/User)
+- REST API Integration (Django REST Framework)
+- Frontend Upgrade using React
+- Cloud Deployment with Docker and AWS
+
+---
+
+## Why This Project
+
+This project highlights:
+
+- Strong understanding of Django architecture
+- Experience with relational database design
+- Implementation of authentication and authorization
+- Ability to design scalable backend systems
 
 ---
 
@@ -196,3 +215,6 @@ Contributions are welcome. Fork the repository and submit a pull request.
 
 ---
 
+## License
+
+This project is licensed under the MIT License.
