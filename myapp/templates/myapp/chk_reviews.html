@@ -14,7 +14,12 @@
             {% for review in book.review_set.all %}
                 <div class="review-card" style="padding: 2rem; background: white; border-radius: 1.5rem; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                        <span style="font-weight: 700; color: var(--text-main);">{{ review.reviewer }}</span>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span style="font-weight: 700; color: var(--text-main);">{{ review.reviewer }}</span>
+                            <span class="sentiment-badge {{ review.sentiment|lower }}" style="font-size: 0.75rem; padding: 0.25rem 0.75rem; border-radius: 2rem; font-weight: 700;">
+                                AI {{ review.sentiment }}
+                            </span>
+                        </div>
                         <span style="font-weight: 800; color: var(--primary-green);">Rating: {{ review.rating }}/5</span>
                     </div>
                     <p style="color: var(--text-muted);">{{ review.comments|default:"No comments provided." }}</p>

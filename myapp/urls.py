@@ -20,6 +20,7 @@ urlpatterns = [
 
     # Authentication (Lab 9)
     path('login/', views.user_login, name='user_login'),
-    path('logout/', views.user_logout, name='user_logout'),
-    path('signup/', views.user_signup, name='user_signup'),
+    path('user_logout/', views.user_logout, name='user_logout'),
+    path('user_signup/', views.user_signup, name='user_signup'),
+    path('ai_chat/', views.ai_chat, name='ai_chat'),
 ]

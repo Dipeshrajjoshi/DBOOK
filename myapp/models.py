@@ -97,6 +97,7 @@ class Review(models.Model):
     rating = models.PositiveIntegerField()
     comments = models.TextField(blank=True)
     date = models.DateField(default=timezone.now)
+    sentiment = models.CharField(max_length=20, default='Neutral') # AI Sentiment tag
 
     def __str__(self):
         return f"Review for {self.book.title} by {self.reviewer}"

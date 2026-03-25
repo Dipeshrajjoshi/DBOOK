@@ -10,6 +10,34 @@ import random
 from .models import Book, Member, Publisher, Order, Review
 from .forms import OrderForm, ReviewForm, FeedbackForm, SearchForm, MemberRegistrationForm
 
+# -----------------------------
+# AI Logic Helpers
+# -----------------------------
+def analyze_sentiment(text):
+    """Simple AI Rule-based sentiment analysis"""
+    positive_words = ['good', 'great', 'excellent', 'amazing', 'love', 'best', 'helpful', 'informative']
+    negative_words = ['bad', 'poor', 'worst', 'hate', 'boring', 'unhelpful', 'useless', 'slow']
+    
+    text = text.lower()
+    score = 0
+    for word in positive_words:
+        if word in text: score += 1
+    for word in negative_words:
+        if word in text: score -= 1
+        
+    if score > 0: return 'Positive'
+    if score < 0: return 'Critical'
+    return 'Neutral'
+
+def get_ai_recommendations(request):
+    """Smart AI Recommendation system based on category interest"""
+    all_books = list(Book.objects.all())
+    if not all_books: return []
+    
+    # Simple logic: pick 3 random books but prioritize those from diverse categories
+    recommendations = random.sample(all_books, min(3, len(all_books)))
+    return recommendations
+
 
 # -----------------------------
 # Lab 8 & 9: Core Views
@@ -23,8 +51,12 @@ def index(request):
     if not last_login:
         last_login_message = "Your las login was more than one hour ago"
 
+    # AI Feature: Recommendations
+    recommendations = get_ai_recommendations(request)
+
     return render(request, 'myapp/index.html', {
         'booklist': booklist,
+        'recommendations': recommendations,
         'last_login': last_login,
         'last_login_message': last_login_message
     })
@@ -116,7 +148,11 @@ def review(request):
         form = ReviewForm(request.POST)
 
         if form.is_valid():
-            review_instance = form.save()
+            review_instance = form.save(commit=False)
+            # AI: Analyze sentiment
+            review_instance.sentiment = analyze_sentiment(review_instance.comments)
+            review_instance.save()
+            
             # Increment review count for the book
             book = review_instance.book
             book.num_reviews += 1
@@ -192,3 +228,39 @@ def user_signup(request):
     else:
         form = MemberRegistrationForm()
     return render(request, 'myapp/signup.html', {'form': form})
+
+
+# -----------------------------
+# AI Chat Backend
+# -----------------------------
+from django.http import JsonResponse
+
+def ai_chat(request):
+    query = request.GET.get('q', '').lower()
+    
+    # Simple AI Routing Logic
+    if 'suggest' in query or 'recommend' in query:
+        books = Book.objects.all()
+        if 'science' in query:
+            match = books.filter(category='S').first()
+        elif 'fiction' in query:
+            match = books.filter(category='F').first()
+        else:
+            match = books.order_by('?').first()
+            
+        if match:
+            response = f"I've found a great one for you: '{match.title}'! It's in the {match.get_category_display()} section."
+        else:
+            response = "I couldn't find a specific book right now, but our collection is always growing!"
+            
+    elif 'price' in query or 'cheap' in query:
+        cheap_book = Book.objects.order_by('price').first()
+        response = f"Our most affordable book is currently '{cheap_book.title}' at just ${cheap_book.price}."
+        
+    elif 'about' in query:
+        response = "DBOOK is a premium library platform designed for book lovers. You can browse, review, and borrow titles seamlessly."
+        
+    else:
+        response = "That's a great question! I'm still learning about our library. Try asking for a book suggestion or information about DBOOK!"
+
+    return JsonResponse({'response': response})

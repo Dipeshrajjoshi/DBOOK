@@ -287,3 +287,88 @@ button:hover, input[type="submit"]:hover {
     h2 { font-size: 2.25rem; }
     .book-list { grid-template-columns: 1fr; gap: 2rem; }
 }
+
+/* ===== AI Feature Styles ===== */
+.sentiment-badge.positive { background: rgba(16, 185, 129, 0.1); color: #059669; }
+.sentiment-badge.critical { background: rgba(239, 68, 68, 0.1); color: #dc2626; }
+.sentiment-badge.neutral { background: rgba(148, 163, 184, 0.1); color: #475569; }
+
+.ai-recommendations .recommendation-grid a:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-blue);
+    box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.1);
+}
+
+/* AI Chat Widget */
+.ai-chat-widget {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 2000;
+}
+
+.ai-chat-button {
+    width: 4rem;
+    height: 4rem;
+    background: var(--accent-gradient);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
+    font-size: 1.5rem;
+    color: white;
+}
+
+.ai-chat-window {
+    position: absolute;
+    bottom: 5rem;
+    right: 0;
+    width: 350px;
+    height: 450px;
+    background: white;
+    border-radius: 2rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    animation: premiumFadeIn 0.3s ease-out;
+}
+
+.ai-chat-header {
+    background: var(--accent-gradient);
+    padding: 1.5rem;
+    color: white;
+    font-weight: 700;
+}
+
+.ai-chat-messages {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.ai-message {
+    padding: 0.75rem 1.25rem;
+    border-radius: 1.25rem;
+    max-width: 85%;
+    font-size: 0.9rem;
+}
+
+.ai-message.bot { background: #f1f5f9; align-self: flex-start; }
+.ai-message.user { background: var(--primary-blue); color: white; align-self: flex-end; }
+
+.ai-chat-input-area {
+    padding: 1rem;
+    border-top: 1px solid #f1f5f9;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.ai-chat-input-area input { margin-bottom: 0; padding: 0.6rem 1rem; border-radius: 1rem; }
+.ai-chat-input-area button { padding: 0.5rem 1rem; border-radius: 1rem; width: 3rem; }
