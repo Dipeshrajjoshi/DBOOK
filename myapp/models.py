@@ -58,6 +58,7 @@ class Member(User):
     last_renewal = models.DateField(default=timezone.now)
     auto_renew = models.BooleanField(default=True)
     borrowed_books = models.ManyToManyField(Book, blank=True)
+    wishlist_books = models.ManyToManyField(Book, related_name='wishlisted_by', blank=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

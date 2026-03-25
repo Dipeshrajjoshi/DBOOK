@@ -24,4 +24,6 @@ urlpatterns = [
     path('user_signup/', views.user_signup, name='user_signup'),
     path('ai_chat/', views.ai_chat, name='ai_chat'),
     path('discover/', views.discover, name='discover'),
+    path('my_wishlist/', views.my_wishlist, name='my_wishlist'),
+    path('toggle_wishlist/<int:book_id>/', views.toggle_wishlist, name='toggle_wishlist'),
 ]

@@ -1,0 +1,37 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}My Wishlist{% endblock %}
+
+{% block myhdg %}Wishlist{% endblock %}
+
+{% block body_block %}
+<div class="wishlist-section fade-in">
+    <h2>My Reading Wishlist</h2>
+    <p style="color: var(--text-muted); margin-bottom: 3rem;">Books you're interested in learning or reading later.</p>
+
+    {% if books %}
+        <div class="book-list">
+            {% for book in books %}
+                <div class="book-item">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <a href="{% url 'myapp:detail' book.id %}">{{ book.title }}</a>
+                            <p>{{ book.get_category_display }} — ${{ book.price }}</p>
+                        </div>
+                        <a href="{% url 'myapp:toggle_wishlist' book.id %}" style="color: #ef4444; font-size: 1.5rem; text-decoration: none;" title="Remove from Wishlist">❤️</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state" style="padding: 5rem; text-align: center; border: 2px dashed rgba(0,0,0,0.05); border-radius: 2.5rem;">
+            <p style="font-size: 1.25rem; color: var(--text-muted); margin-bottom: 2rem;">Your wishlist is currently empty.</p>
+            <a href="{% url 'myapp:index' %}" class="btn-login" style="text-decoration: none;">Explore Books</a>
+        </div>
+    {% endif %}
+
+    <div style="margin-top: 3rem;">
+        <a href="{% url 'myapp:index' %}" class="nav-link" style="color: var(--text-muted); font-weight: 600;">&larr; Back to Home</a>
+    </div>
+</div>
+{% endblock %}

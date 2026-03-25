@@ -242,6 +242,34 @@ def discover(request):
     return render(request, 'myapp/discover.html', {'trending_books': trending_books})
 
 
+@login_required
+def my_wishlist(request):
+    if hasattr(request.user, 'member'):
+        member = request.user.member
+        books = member.wishlist_books.all()
+        return render(request, 'myapp/wishlist.html', {'books': books})
+    else:
+        return HttpResponse('You are not a registered member!')
+
+
+@login_required
+def toggle_wishlist(request, book_id):
+    if hasattr(request.user, 'member'):
+        member = request.user.member
+        book = get_object_or_404(Book, pk=book_id)
+        
+        if book in member.wishlist_books.all():
+            member.wishlist_books.remove(book)
+            status = 'removed'
+        else:
+            member.wishlist_books.add(book)
+            status = 'added'
+            
+        return HttpResponseRedirect(reverse('myapp:detail', args=[book_id]))
+    else:
+        return HttpResponse('You are not a registered member!')
+
+
 # -----------------------------
 # AI Chat Backend
 # -----------------------------

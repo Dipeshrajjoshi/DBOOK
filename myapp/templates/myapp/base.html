@@ -27,8 +27,11 @@
                     <li><a href="{% url 'myapp:findbooks' %}" class="nav-link">Search</a></li>
                     
                     {% if user.is_authenticated %}
+                        {% if user.member %}
+                            <li><a href="{% url 'myapp:my_wishlist' %}" class="nav-link">Wishlist</a></li>
+                        {% endif %}
                         <li><a href="{% url 'myapp:user_logout' %}" class="nav-link btn-logout">Logout</a></li>
-                    {% else %}
+{% else %}
                         <li><a href="{% url 'myapp:user_signup' %}" class="nav-link">Signup</a></li>
                         <li><a href="{% url 'myapp:user_login' %}" class="nav-link btn-login">Login</a></li>
                     {% endif %}
