@@ -1,220 +1,95 @@
-# DBOOK – Library Management System
+# DBOOK - Premium eBook Platform
 
-A full-stack library management web application developed under **LSP Technologies Inc., Canada**.  
-DBOOK provides a structured and scalable platform to manage books, publishers, and users efficiently.
-
-Repository: https://github.com/Dipeshrajjoshi/DBOOK.git
-
----
-
-## Overview
-
-DBOOK is designed to demonstrate real-world full-stack development using Django, focusing on backend architecture, database design, authentication, and CRUD operations. The project reflects industry-level practices for building scalable and maintainable web applications.
-
----
-
-## Features
-
-- Book Management (Create, Read, Update, Delete)
-- Publisher Management
-- User Authentication (Login, Register, Logout)
-- Search and Filtering Functionality
-- Admin Dashboard using Django Admin
-- Secure Data Handling with Django ORM
-
----
-
-## Tech Stack
-
-- Backend: Django (Python)
-- Frontend: HTML, CSS, JavaScript
-- Database: SQLite (development) / PostgreSQL (production-ready)
-- Authentication: Django Built-in Authentication System
-
----
+DBOOK is a modern, premium Django-based eBook management platform featuring a high-end Glassmorphism design system, comprehensive review management, and advanced administrative tools.
 
 ## System Design
 
-### 1. High-Level Architecture
+### High-Level Design (HLD)
+
+The application follows the **Django MVT (Model-View-Template)** architecture, ensuring a clean separation of concerns between data, business logic, and presentation.
 
 ```mermaid
-flowchart TD
-    A[User Browser] --> B[Frontend Templates (HTML/CSS/JS)]
-    B --> C[Django URL Dispatcher]
-    C --> D[Django Views]
-    D --> E[Django Models (ORM)]
-    E --> F[(Database)]
-    D --> B
-```
-
----
-
-### 2. Request-Response Flow
-
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant F as Frontend
-    participant V as Django View
-    participant M as Model
-    participant DB as Database
-
-    U->>F: Sends Request
-    F->>V: HTTP Request
-    V->>M: Business Logic
-    M->>DB: Query/Insert/Update
-    DB-->>M: Data Response
-    M-->>V: Processed Data
-    V-->>F: Render Template
-    F-->>U: Response Displayed
-```
-
----
-
-### 3. Component Architecture
-
-```mermaid
-flowchart LR
-    A[Client Layer] --> B[Application Layer]
-    B --> C[Database Layer]
-
-    subgraph Client Layer
-        A1[Browser UI]
-    end
-
-    subgraph Application Layer (Django)
-        B1[URLs]
-        B2[Views]
-        B3[Models]
-        B4[Forms]
-        B5[Authentication]
-    end
-
-    subgraph Database Layer
-        C1[(SQLite/PostgreSQL)]
+graph TD
+    User((User/Browser)) -->|HTTP Requests| URL[URL Dispatcher]
+    URL -->|Route to View| View[Views]
+    View -->|Query Data| Model[Models]
+    Model <=>|ORM| DB[(SQLite Database)]
+    View -->|Context Data| Template[Templates]
+    Template -->|Rendered HTML/CSS| User
+    
+    subgraph "Django App Layer"
+    URL
+    View
+    Model
+    Template
     end
 ```
 
----
+### Low-Level Design (LLD)
 
-### 4. Database Schema (ER Diagram)
-
-```mermaid
-erDiagram
-    USER {
-        int id
-        string username
-        string email
-        string password
-    }
-
-    PUBLISHER {
-        int id
-        string name
-        string website
-        string city
-        string country
-    }
-
-    BOOK {
-        int id
-        string title
-        date publication_date
-        int publisher_id
-    }
-
-    USER ||--o{ BOOK : manages
-    PUBLISHER ||--o{ BOOK : publishes
-```
-
----
-
-### 5. Authentication Flow
+The data model is structured around five core entities, providing robust support for publishers, book catalogs, members, ordering, and community feedback.
 
 ```mermaid
-flowchart TD
-    A[User Login/Register] --> B[Validate Credentials]
-    B -->|Valid| C[Create Session]
-    B -->|Invalid| D[Authentication Failed]
-    C --> E[Access Protected Routes]
-    E --> F[Logout]
-    F --> G[Session Terminated]
+classDiagram
+    class Publisher {
+        +String name
+        +URL website
+        +String city
+        +String country
+    }
+    class Book {
+        +String title
+        +Category category
+        +Integer num_pages
+        +Decimal price
+        +Integer num_reviews
+    }
+    class Member {
+        +Status status
+        +String address
+        +String city
+        +String province
+        +Date last_renewal
+        +Boolean auto_renew
+    }
+    class Order {
+        +OrderType order_type
+        +Date order_date
+        +total_items()
+    }
+    class Review {
+        +Email reviewer
+        +Integer rating
+        +TextField comments
+        +Date date
+    }
+
+    Publisher "1" -- "*" Book : publishes
+    Member "1" -- "*" Order : places
+    Order "*" -- "*" Book : contains
+    Book "1" -- "*" Review : receives
+    Member --|> User : extends
 ```
 
----
+## Features
 
-### 6. Deployment Architecture (Scalable Design)
+- **Premium UI**: Modern Glassmorphism theme with blue-green gradients and smooth micro-animations.
+- **Member Management**: Extended user profiles with borrowing history and session tracking.
+- **Review System**: Integrated book reviews with average rating calculations and comment threads.
+- **Advanced Admin**: Customized Django admin interface for rapid catalog management.
+- **Search & Filter**: Keyword and category-based book discovery system.
 
-```mermaid
-flowchart TD
-    A[User] --> B[Browser]
-    B --> C[Nginx]
-    C --> D[Gunicorn]
-    D --> E[Django Application]
-    E --> F[(PostgreSQL Database)]
-    E --> G[Redis Cache]
-```
+## Getting Started
 
----
-
-## Installation
-
-```bash
-git clone https://github.com/Dipeshrajjoshi/DBOOK.git
-cd DBOOK
-python -m venv venv
-
-# Activate virtual environment
-source venv/bin/activate      # Mac/Linux
-venv\Scripts\activate         # Windows
-
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
-```
-
----
-
-## Usage
-
-- Application: http://127.0.0.1:8000/
-- Admin Panel: http://127.0.0.1:8000/admin/
-
----
-
-## Organization
-
-Developed under **LSP Technologies Inc., Canada**, focusing on building scalable software solutions and modern web applications.
-
----
-
-## Future Improvements
-
-- Book Borrow and Return System
-- Role-Based Access Control (Admin/User)
-- REST API Integration (Django REST Framework)
-- Frontend Upgrade using React
-- Cloud Deployment with Docker and AWS
-
----
-
-## Why This Project
-
-This project highlights:
-
-- Strong understanding of Django architecture
-- Experience with relational database design
-- Implementation of authentication and authorization
-- Ability to design scalable backend systems
-
----
-
-## Contribution
-
-Contributions are welcome. Fork the repository and submit a pull request.
-
----
-
-## License
-
-This project is licensed under the MIT License.
+1. **Install Dependencies**:
+   ```bash
+   pip install django
+   ```
+2. **Setup Database**:
+   ```bash
+   python manage.py migrate
+   ```
+3. **Run Server**:
+   ```bash
+   python manage.py runserver
+   ```
